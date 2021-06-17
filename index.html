@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+	<title>Cross-rhythm Visualiser</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.min.css" integrity="sha512-xiunq9hpKsIcz42zt0o2vCo34xV0j6Ny8hgEylN3XBglZDtTZ2nwnqF/Z/TTCc18sGdvCjbFInNd++6q3J0N6g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+	<style type="text/css">
+		body {
+			min-width: 320px;
+		}
+
+		h1 {
+			text-align: center;
+		}
+
+		label {
+			display: inline-block;
+		}
+
+		input[type="checkbox"] {
+			display: block;
+			margin-top: 1rem;
+			margin-left: 1rem;
+		}
+
+		table {
+			border-collapse: collapse;
+			margin-bottom: 0;
+			display: table;
+			overflow-x: initial;
+		}
+
+		td {
+			border: 0.1rem solid #e1e1e1;
+			text-align: center;
+			font-size: 20px;
+			min-width: 20px;
+		}
+
+		td:first-child {
+			background-color: #dc3545;
+			color: #fff;
+		}
+
+		td:first-child,
+		td:last-child {
+			padding: 1.2rem 1.5rem;
+		}
+
+		td.counterpulse {
+			background-color: #0060df;
+			color: #fff;
+		}
+
+		td:first-child.counterpulse {
+			background-color: #9b4dca;
+		}
+
+		td.highlight {
+			background-color: #ffc107 !important;
+			color: #fff;
+		}
+
+		.table-container {
+			overflow: auto;
+			margin-bottom: 2.5rem;
+		}
+
+		.row .column {
+			padding: 0 1rem;
+		}
+
+		@media (min-width:  40rem) {
+			.row .column.column-20 {
+				margin-left: 25%;
+			}
+
+			.button-container {
+				margin: 0 auto;
+				width: max-content;
+			}
+		}
+
+		@media (max-width: 39.99rem) {
+			.container {
+				padding: 0 1rem;
+			}
+
+			.column {
+				flex: 1 1 auto !important;
+				max-width: 100% !important;
+				width: 100% !important;
+			}
+
+			.column:last-child {
+				max-width: 20% !important;
+			}
+
+			button {
+				width: 100%;
+			}
+		}
+
+		.row {
+			margin-left: -1rem;
+			flex-direction: row;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<h1>Cross-rhythm Visualiser</h1>
+
+		<form>
+			<div class="row">
+				<div class="column column-20">
+					<label for="rhythm1">Rhythm 1</label>
+					<input value="3" step="1" min="1" type="number" id="rhythm1" data-type="rhythm">
+				</div>
+				<div class="column column-25">
+					<label for="sound1">Instrument</label>
+					<select id="sound1" data-type="sound">
+						<option value="tink">Claves</option>
+						<option value="clap">Clap</option>
+						<option value="boom">Electronic drum</option>
+						<option value="hihat">Hi-hat</option>
+						<option value="kick" selected>Kick drum</option>
+						<option value="openhat">Open hi-hat</option>
+						<option value="ride">Ride cymbal</option>
+						<option value="snare">Snare drum</option>
+						<option value="tom">Tom</option>
+					</select>
+				</div>
+				<div>
+					<label for="mute1">Mute</label>
+					<input id="mute1" class="mute" type="checkbox">
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="column column-20">
+					<label for="rhythm2">Rhythm 2</label>
+					<input value="4" step="1" min="1" type="number" id="rhythm2" data-type="rhythm">
+				</div>
+				<div class="column column-25">
+					<label for="sound2">Instrument</label>
+					<select id="sound2" data-type="sound">
+						<option value="tink">Claves</option>
+						<option value="clap">Clap</option>
+						<option value="boom">Electronic drum</option>
+						<option value="hihat">Hi-hat</option>
+						<option value="kick">Kick drum</option>
+						<option value="openhat">Open hi-hat</option>
+						<option value="ride">Ride cymbal</option>
+						<option value="snare" selected>Snare drum</option>
+						<option value="tom">Tom</option>
+					</select>
+				</div>
+				<div>
+					<label for="mute2">Mute</label>
+					<input id="mute2" class="mute" type="checkbox">
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="column column-20">
+					<label for="bpm">Tempo</label>
+					<input value="180" min="1" step="1" type="number" id="bpm" data-type="tempo">
+				</div>
+
+				<div class="column column-25">
+					<label for="sound3">Metronome</label>
+					<select id="sound3" data-type="sound">
+						<option value="tink" selected>Claves</option>
+						<option value="clap">Clap</option>
+						<option value="boom">Electronic drum</option>
+						<option value="hihat">Hi-hat</option>
+						<option value="kick">Kick drum</option>
+						<option value="openhat">Open hi-hat</option>
+						<option value="ride">Ride cymbal</option>
+						<option value="snare">Snare drum</option>
+						<option value="tom">Tom</option>
+					</select>
+				</div>
+
+				<div>
+					<label for="mute3">Mute</label>
+					<input id="mute3" class="mute" type="checkbox" checked>
+				</div>
+			</div>
+
+			<div class="button-container">
+				<button type="button" id="play">Play</button>
+				<button type="button" id="stop" disabled>Stop</button>
+			</div>
+		</form>
+
+		<div class="table-container">
+			<table>
+				<tbody id="result"></tbody>
+			</table>
+		</div>
+	</div>
+	<script type="text/javascript" src="script.js"></script>
+</body>
+</html>
